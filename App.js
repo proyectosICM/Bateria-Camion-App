@@ -5,19 +5,28 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { EscogerCamion } from './Screens/Conductor/EscogerCamion';
 import { NavigationContainer } from '@react-navigation/native';
 import { DetalleBateria } from './Screens/Conductor/DetalleBateria';
-import { GraficoBarras } from './Screens/Conductor/Graficos';
+import { SimpleBarChart } from './Screens/Conductor/Graficos';
+import { CustomBottomTabBar } from './CustomBottomTabBar';
+import { Redigirir } from './Screens/Login/Redirigir';
+
 
 
 export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
-
+ 
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name='Muestra' component={GraficoBarras} />
-        <Stack.Screen name='Login' component={Login} />
 
+        <Stack.Screen name='Login' component={Login} />
+        <Stack.Screen
+          name="Inicio"
+          component={CustomBottomTabBar}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name='Muestra' component={SimpleBarChart} />
+        <Stack.Screen name='Redirigir' component={Redigirir} />
         <Stack.Screen name='Detalle' component={DetalleBateria} />
         <Stack.Screen name='Escoger' component={EscogerCamion} />
       </Stack.Navigator>

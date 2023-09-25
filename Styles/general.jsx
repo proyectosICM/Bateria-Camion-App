@@ -17,7 +17,8 @@ export const general = StyleSheet.create({
   cardContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginHorizontal: 30,
+    alignItems: "center",
+    justifyContent: "center"
   },
   centerText: {
     textAlign: "center", // Centra el texto horizontalmente

@@ -24,16 +24,20 @@ export function Login() {
 
   const navigation = useNavigation();
   const handleLogin = async () => {
+
     try {
       const response = await axios.post(`${base}/login`, {
         username,
         pass_tra,
       });
+      console.log("Nah")
+
       await AsyncStorage.setItem("token", response.data.token);
       await AsyncStorage.setItem("username", response.data.Username);
-      navigation.navigate("Escoger");
+      navigation.navigate("Redirigir");
+
     } catch (error) {
-      setError("Error en la autenticación");
+      setError("Error en la autenticación"); 
       console.log(error);
     }
   };
