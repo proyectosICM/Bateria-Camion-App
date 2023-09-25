@@ -14,4 +14,12 @@ export const general = StyleSheet.create({
     marginBottom: 10,
     color: ColorTexto
   },
+  cardContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginHorizontal: 30,
+  },
+  centerText: {
+    textAlign: "center", // Centra el texto horizontalmente
+  },
 });

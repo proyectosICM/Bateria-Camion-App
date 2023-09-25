@@ -5,6 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { EscogerCamion } from './Screens/Conductor/EscogerCamion';
 import { NavigationContainer } from '@react-navigation/native';
 import { DetalleBateria } from './Screens/Conductor/DetalleBateria';
+import { GraficoBarras } from './Screens/Conductor/Graficos';
+
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -13,6 +15,7 @@ export default function App() {
 
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name='Muestra' component={GraficoBarras} />
         <Stack.Screen name='Login' component={Login} />
 
         <Stack.Screen name='Detalle' component={DetalleBateria} />

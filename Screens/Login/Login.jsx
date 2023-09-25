@@ -17,7 +17,7 @@ export function Login() {
     const rolValue = await AsyncStorage.getItem("rol");
     setUser(rolValue);
   };
-
+ 
   useEffect(() => {
     ListarUser();
   }, [ListarUser]);
