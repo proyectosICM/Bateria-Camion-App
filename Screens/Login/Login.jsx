@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { base } from "../../API/apiurls";
 const backgroundImage = require("../Login/login1.jpg"); // Importa tu imagen de fondo
@@ -30,7 +30,6 @@ export function Login() {
         username,
         pass_tra,
       });
-      console.log("Nah")
 
       await AsyncStorage.setItem("token", response.data.token);
       await AsyncStorage.setItem("username", response.data.Username);
@@ -38,6 +37,7 @@ export function Login() {
 
     } catch (error) {
       setError("Error en la autenticación"); 
+      Alert.alert("El usuario o contraseña ingresados son incorrectos")
       console.log(error);
     }
   };

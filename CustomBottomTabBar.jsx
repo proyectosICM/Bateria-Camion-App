@@ -6,6 +6,7 @@ import { DetalleBateria } from "./Screens/Conductor/DetalleBateria";
 import { EscogerCamion } from "./Screens/Conductor/EscogerCamion";
 import { Cuenta } from "./Screens/Cuenta";
 import { Incidencias } from "./Screens/Conductor/Incidencias";
+import { MenuCamiones } from "./Screens/Common/MenuCamiones";
 
 const Tab = createBottomTabNavigator();
 
@@ -13,7 +14,6 @@ export function CustomBottomTabBar({ navigation }) {
   const [rol, setRol] = useState(null);
 
   useEffect(() => {
-    // Función asincrónica para obtener el valor de 'user' de AsyncStorage
     const getUserFromAsyncStorage = async () => {
       try {
         const rolValue = await AsyncStorage.getItem("rol");
@@ -34,26 +34,41 @@ export function CustomBottomTabBar({ navigation }) {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: "#A69677", // Cambia este color al que prefieras para los íconos seleccionados
-        tabBarInactiveTintColor: "#9CA4A6", // Cambia este color al que prefieras para los íconos no seleccionados
+        tabBarActiveTintColor: "#A69677",
+        tabBarInactiveTintColor: "#9CA4A6",
       }}
     >
-      <Tab.Screen
-        name="Home"
-        component={DetalleBateria}
-        options={{
-          tabBarIcon: ({ color, size }) => <FontAwesome5 name="home" color={color} size={size} />,
-        }}
-      />
+      {rol && rol == "CONDUCTOR" && (
+        <>
+          <Tab.Screen
+            name="Home"
+            component={DetalleBateria}
+            options={{
+              tabBarIcon: ({ color, size }) => <FontAwesome5 name="home" color={color} size={size} />,
+            }}
+          />
 
-      <Tab.Screen
-        name="Incidencias"
-        component={Incidencias}
-        options={{
-          tabBarIcon: ({ color, size }) => <FontAwesome5 name="exclamation-circle" color={color} size={size} />,
-        }}
-      />
+          <Tab.Screen
+            name="Incidencias"
+            component={Incidencias}
+            options={{
+              tabBarIcon: ({ color, size }) => <FontAwesome5 name="exclamation-circle" color={color} size={size} />,
+            }}
+          />
+        </>
+      )}
 
+      {rol && rol == "SUPERVISOR" && (
+        <>
+          <Tab.Screen
+            name="Listado"
+            component={MenuCamiones}
+            options={{
+              tabBarIcon: ({ color, size }) => <FontAwesome5 name="home" color={color} size={size} />,
+            }}
+          />
+        </>
+      )}
       <Tab.Screen
         name="Cuenta"
         component={Cuenta}

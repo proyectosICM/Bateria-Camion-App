@@ -7,6 +7,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { ImageBackground } from "react-native";
 import { ColorIcono, ColorTexto, ColorTextoBoton } from "../Styles/paletaDeColores";
+import { infoURL } from "../API/apiurls";
+import { useListarElementos } from './../Hooks/CRUDHook';
 
 
 export function Cuenta({ navigation }) {
@@ -34,13 +36,12 @@ export function Cuenta({ navigation }) {
     }
   };
 
-//  const ListarUsuarios = useListarElementos(`${infoURL}${user}`, setUsuario, "logout");
-/*
+const ListarUsuarios = useListarElementos(`${infoURL}${user}`, setUsuario, "logout");
+
   useEffect(() => {
     ListarUsuarios();
   }, [ListarUsuarios]);
  
-*/
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -50,9 +51,9 @@ export function Cuenta({ navigation }) {
       <Text style={[styles.title, {textAlign:"center"}]}>¡Hola, {user}!</Text>
       <Divider style={{ backgroundColor: "#333", marginVertical: 10 }} />
       <Text style={styles.subtitle}>
-        Nombre: {usuario.nombre} {usuario.apellido}
+        Nombre: {usuario.nom_tra} {usuario.ape_tra}
       </Text>
-      <Text style={styles.subtitle}>Rol: {usuario.rolesModel?.nombre}</Text>
+      <Text style={styles.subtitle}>Rol: {usuario.rolesModel?.name}</Text>
       <View style={styles.buttonContainer}>
         <Button
           title=" Cambiar Contraseña"
@@ -70,15 +71,6 @@ export function Cuenta({ navigation }) {
           }}
           icon={<FontAwesome name="edit" size={20} color={ColorIcono} />}
           buttonStyle={{ backgroundColor: "#28a745", marginBottom: 10 }}
-          titleStyle={{color: ColorTextoBoton}}
-        />
-        <Button
-          title=" Historial de Actividades"
-          onPress={() => {
-            alert("Este modulo aun no esta disponible");
-          }}
-          icon={<FontAwesome name="history" size={20} color={ColorIcono} />}
-          buttonStyle={{ backgroundColor: "#6c757d" }}
           titleStyle={{color: ColorTextoBoton}}
         />
       </View>
