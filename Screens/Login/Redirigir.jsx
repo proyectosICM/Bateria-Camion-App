@@ -4,6 +4,8 @@ import { infoURL } from "../../API/apiurls";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useListarElementos } from "../../Hooks/CRUDHook";
 import { MenuCamiones } from "../Common/MenuCamiones";
+import { Cargando } from "../Common/Cargando";
+import { general } from "../../Styles/general";
 
 export function Redigirir({ navigation }) {
   const [info, setInfo] = useState();
@@ -43,7 +45,6 @@ export function Redigirir({ navigation }) {
   useEffect(() => {
     const obtenerDatosUser = async () => {
       if (info) {
-        console.log(info);
         await AsyncStorage.setItem("rol", info.rolesModel.name);
         await AsyncStorage.setItem("empresa", info.empresasModel.id_emp.toString());
         await AsyncStorage.setItem("usuario", info.id_tra.toString());
@@ -56,8 +57,8 @@ export function Redigirir({ navigation }) {
   }, [info, navigation]);
 
   return (
-    <View>
-      <Text>Wel {info ? info.id_tra : "W"}</Text>
+    <View style={general.container}>
+      <Cargando />
     </View>
   );
 }

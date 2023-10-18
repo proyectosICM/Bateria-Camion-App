@@ -3,8 +3,10 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-nati
 import { Card } from "react-native-elements";
 import { general } from "../../Styles/general";
 import { LineChart } from "react-native-chart-kit";
+import { useNavigation } from "@react-navigation/native";
 
 export function DetalleBateria() {
+  const navigation = useNavigation();
   const [selectedData, setSelectedData] = useState(null);
 
   const data1 = {
@@ -52,7 +54,7 @@ export function DetalleBateria() {
     backgroundGradientTo: "#ffffff",
     color: (opacity = 1) => `rgba(123, 0, 0, ${opacity})`,
     strokeWidth: 2,
-  };
+  }; 
 
   const handleCardClick = (data) => {
     setSelectedData(data);
