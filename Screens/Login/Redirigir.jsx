@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Text, View } from "react-native";
-import { infoURL } from "../../API/apiurls";
+import { camionxtrabajadorURL, infoURL } from "../../API/apiurls";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useListarElementos } from "../../Hooks/CRUDHook";
 import { MenuCamiones } from "../Common/MenuCamiones";
@@ -10,6 +10,7 @@ import { general } from "../../Styles/general";
 export function Redigirir({ navigation }) {
   const [info, setInfo] = useState();
   const [user, setUser] = useState(null);
+  const [camionData, setCamionData] = useState();
   const [showText, setShowText] = useState(false);
 
   const fetchData = useCallback(async () => {
@@ -24,23 +25,11 @@ export function Redigirir({ navigation }) {
 
   const ListarInfo = useListarElementos(`${infoURL}${user}`, setInfo);
 
+  const CamionData = useListarElementos(`${camionxtrabajadorURL}${info && info.id_tra}`, setCamionData)
+  console.log(`${camionxtrabajadorURL}${info && info.id_tra}`);
   useEffect(() => {
     ListarInfo();
   }, [ListarInfo]);
-
-  const redirecion = (rol) => {
-    switch (rol) {
-      case "CONDUCTOR":
-        navigation.navigate("Inicio");
-        break;
-      case "SUPERVISOR":
-        navigation.navigate("Listado");
-        break;
-      default:
-        console.log("QA");
-        break;
-    }
-  };
 
   useEffect(() => {
     const obtenerDatosUser = async () => {
@@ -48,9 +37,7 @@ export function Redigirir({ navigation }) {
         await AsyncStorage.setItem("rol", info.rolesModel.name);
         await AsyncStorage.setItem("empresa", info.empresasModel.id_emp.toString());
         await AsyncStorage.setItem("usuario", info.id_tra.toString());
-        //redirecion(info.rolesModel.name)
         navigation.navigate("Inicio");
-        // Navegar a la pantalla "Inicio" después de 2 segundos
       }
     };
     obtenerDatosUser();

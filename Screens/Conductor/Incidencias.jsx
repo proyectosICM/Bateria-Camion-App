@@ -11,25 +11,10 @@ import { useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 export function Incidencias() {
-  const incidenciaNoRevisada = true;
   const navigation = useNavigation();
   const handleCardClick = (data) => {
     setSelected(data);
   };
-
-  const [token, setToken] = useState();
-  const [user, setUser] = useState();
-
-  const fetchData = useCallback(async () => {
-    const token = await AsyncStorage.getItem("token");
-    const username = await AsyncStorage.getItem("username");
-    setUser(username);
-    setToken(token);
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
 
   const [selected, setSelected] = useState("Sin Revisar");
   const [urlIncidencia, setUrlIncidencia] = useState("");
@@ -53,10 +38,6 @@ export function Incidencias() {
 
     return () => clearInterval(intervalId);
   }, [ListarIncidencias]);
-
-  const handleDetalle = () => {
-    navigation.navigate("Detalle Incidencia");
-  };
 
   return (
     <View style={general.container}>
@@ -88,19 +69,15 @@ export function Incidencias() {
                   <Text style={general.centerText}>{dato.estado ? "Revisada" : "No revisada"}</Text>
                   {dato.estado == false && (
                     <Icon
-                      name="dot-circle-o" // Puedes cambiar el ícono aquí
-                      type="font-awesome" // Asegúrate de usar el tipo correcto de ícono
+                      name="dot-circle-o"
+                      type="font-awesome"
                       size={20}
-                      color="red" // Color del indicador
+                      color="red"
                       containerStyle={{ position: "absolute", top: 10, left: 10 }}
                     />
                   )}
                   <Text style={general.centerText}>{dato.id_inc}</Text>
                   <Text style={general.centerText}>{dato.nom_inc}</Text>
-                  {/* 
-                <Text style={general.centerText}>Voltaje: {dato.voltaje}</Text>
-                <Text style={general.centerText}>Carga: {dato.carga} v</Text>
-                <Text style={general.centerText}>Corriente: {dato.corriente}</Text>*/}
                 </View>
               </TouchableOpacity>
             </Card>
