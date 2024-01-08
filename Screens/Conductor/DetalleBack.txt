@@ -95,7 +95,7 @@ export function DetalleBateria() {
               <Text style={general.centerText}>Bateria 3</Text>
               <Text style={general.centerText}>Voltaje: 22 v</Text>
               <Text style={general.centerText}>Carga: 22 v</Text>
-              <Text style={general.centerText}>Corriente: 22 v</Text> 
+              <Text style={general.centerText}>Corriente: 22 v</Text>
             </View>
           </Card>
         </TouchableOpacity>

@@ -1,5 +1,5 @@
 import React from "react";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, View, Text } from "react-native";
 
 export function Cargando({ showText }) {
   const handleLogout = async () => {
@@ -24,6 +24,7 @@ export function Cargando({ showText }) {
           <Button title="Cerrar Sesión" buttonStyle={styles.styleButton} titleStyle={styles.tittleText} onPress={() => handleLogout()} />
         </>
       )}
+      <Text>Cargando datos...</Text>
     </View>
   );
 }

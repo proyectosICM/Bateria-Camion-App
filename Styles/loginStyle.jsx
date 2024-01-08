@@ -6,7 +6,7 @@ export const login = StyleSheet.create({
         resizeMode: "cover",
       },
       container: {
-        flex: 1,
+        flex: 1, 
         backgroundColor: "rgba(0, 0, 0, 0.5)", // Fondo semi-transparente
         alignItems: "center",
         justifyContent: "center",
