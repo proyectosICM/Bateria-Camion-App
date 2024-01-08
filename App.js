@@ -27,6 +27,7 @@ export default function App() {
           component={CustomBottomTabBar}
           options={{ headerShown: false }}
         />
+
         <Stack.Screen name='Muestra' component={SimpleBarChart} />
         <Stack.Screen name='Redirigir' component={Redigirir} />
         <Stack.Screen name='Detalle' component={DetalleBateria} />

@@ -60,9 +60,9 @@ export function DetalleBateria() {
     setSelectedData(data);
   };
 
-
+  console.log("sdd")
   return (
-    <ScrollView contentContainerStyle={general.container}>
+    < > 
       <Text>Placa: ABC</Text>
       <Text>Incidencias sin revisar: 0</Text>
       <Text>Registro en tiempo real</Text>
@@ -123,7 +123,7 @@ export function DetalleBateria() {
           )}
         </Card>
       </View>
-    </ScrollView>
+    </>
   );
 }
 

@@ -7,6 +7,7 @@ import { EscogerCamion } from "./Screens/Conductor/EscogerCamion";
 import { Cuenta } from "./Screens/Cuenta";
 import { Incidencias } from "./Screens/Conductor/Incidencias";
 import { MenuCamiones } from "./Screens/Common/MenuCamiones";
+import { Home } from "./Screens/Common/Home";
 
 const Tab = createBottomTabNavigator();
 
@@ -38,16 +39,15 @@ export function CustomBottomTabBar({ navigation }) {
         tabBarInactiveTintColor: "#9CA4A6",
       }}
     >
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarIcon: ({ color, size }) => <FontAwesome5 name="home" color={color} size={size} />,
+        }}
+      />
       {rol && rol == "CONDUCTOR" && (
         <>
-          <Tab.Screen
-            name="Home"
-            component={DetalleBateria}
-            options={{
-              tabBarIcon: ({ color, size }) => <FontAwesome5 name="home" color={color} size={size} />,
-            }}
-          />
-
           <Tab.Screen
             name="Incidencias"
             component={Incidencias}
@@ -58,7 +58,7 @@ export function CustomBottomTabBar({ navigation }) {
         </>
       )}
 
-      {rol && rol == "SUPERVISOR" && (
+      {/*rol && rol == "SUPERVISOR" && (
         <>
           <Tab.Screen
             name="Listado"
@@ -68,7 +68,7 @@ export function CustomBottomTabBar({ navigation }) {
             }}
           />
         </>
-      )}
+          )*/}
       <Tab.Screen
         name="Cuenta"
         component={Cuenta}

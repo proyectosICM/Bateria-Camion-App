@@ -1,11 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Alert, ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import { Alert, ImageBackground, Text, TextInput, TouchableOpacity, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { base } from "../../API/apiurls";
 import { login } from "../../Styles/loginStyle";
-const backgroundImage = require("../Login/login1.jpg"); // Importa tu imagen de fondo
+const backgroundImage = require("../Login/login1.jpg"); 
 
 export function Login() {
   const [username, setUsername] = useState("");
@@ -15,7 +15,7 @@ export function Login() {
   const navigation = useNavigation();
 
   const handleLogin = async () => {
-    try {
+    try { 
       const response = await axios.post(`${base}/login`, { username, pass_tra });
       await AsyncStorage.setItem("token", response.data.token);
       await AsyncStorage.setItem("username", response.data.Username);
