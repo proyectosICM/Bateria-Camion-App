@@ -1,13 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { Card } from "react-native-elements";
 import { general } from "../../Styles/general";
 import { LineChart } from "react-native-chart-kit";
 import { useNavigation } from "@react-navigation/native";
+import { useListarElementos } from "../../Hooks/CRUDHook";
+import { bateriasxCamion, camionesURL } from "../../API/apiurls";
 
 export function DetalleBateria() {
   const navigation = useNavigation();
   const [selectedData, setSelectedData] = useState(null);
+
+  const [baterias, setBaterias] = useState();
+  const [camion, setCamion] = useState();
+
+  const ListarBaterias = useListarElementos(`${bateriasxCamion}1`, setBaterias);
+  const ListarCamion = useListarElementos(`${camionesURL}1`, setCamion);
+
+  useEffect(() => {
+    ListarBaterias();
+  }, [ListarBaterias]);
+
+  useEffect(() => {
+    ListarCamion();
+  }, [ListarCamion]);
+
+  
 
   const data1 = {
     title: "Bateria 1",
@@ -62,54 +80,27 @@ export function DetalleBateria() {
 
   console.log("sdd");
   return (
-    <>
-      <Text>Placa: ABC</Text>
+    <ScrollView>
+      <Text>Placa: {camion.placa}</Text>
       <Text>Incidencias sin revisar: 0</Text>
       <Text>Registro en tiempo real</Text>
+
       <View style={general.cardContainer}>
-        <TouchableOpacity onPress={() => handleCardClick(data1)}>
-          <Card title="Bateria1">
-            <View>
-              <Text style={general.centerText}>Bateria 1</Text>
-              <Text style={general.centerText}>Voltaje: 22 v</Text>
-              <Text style={general.centerText}>Carga: 22 v</Text>
-              <Text style={general.centerText}>Corriente: 22 v</Text>
-            </View>
-          </Card>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handleCardClick(data2)}>
-          <Card title="Bateria2">
-            <View>
-              <Text style={general.centerText}>Bateria 2</Text>
-              <Text style={general.centerText}>Voltaje: 22 v</Text>
-              <Text style={general.centerText}>Carga: 22 v</Text>
-              <Text style={general.centerText}>Corriente: 22 v</Text>
-            </View>
-          </Card>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handleCardClick(data3)}>
-          <Card title="Bateria3">
-            <View>
-              <Text style={general.centerText}>Bateria 3</Text>
-              <Text style={general.centerText}>Voltaje: 22 v</Text>
-              <Text style={general.centerText}>Carga: 22 v</Text>
-              <Text style={general.centerText}>Corriente: 22 v</Text> 
-            </View>
-          </Card>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handleCardClick(data4)}>
-          <Card title="Bateria4">
-            <View>
-              <Text style={general.centerText}>Bateria 4</Text>
-              <Text style={general.centerText}>Voltaje: 22 v</Text>
-              <Text style={general.centerText}>Carga: 22 v</Text>
-              <Text style={general.centerText}>Corriente: 22 v</Text>
-            </View>
-          </Card>
-        </TouchableOpacity>
+        {baterias &&
+          baterias.map((bateria, index) => {
+            return (
+              <TouchableOpacity onPress={() => handleCardClick(data1)}>
+                <Card title="Bateria1">
+                  <View>
+                    <Text style={general.centerText}>Bateria {index + 1} </Text>
+                    <Text style={general.centerText}>Voltaje: {bateria.voltaje}</Text>
+                    <Text style={general.centerText}>Carga: {bateria.carga}</Text>
+                    <Text style={general.centerText}>Corriente: {bateria.corriente}</Text>
+                  </View>
+                </Card>
+              </TouchableOpacity>
+            );
+          })}
 
         <Card>
           {selectedData ? (
@@ -124,7 +115,7 @@ export function DetalleBateria() {
           )}
         </Card>
       </View>
-    </>
+    </ScrollView>
   );
 }
 
@@ -141,10 +132,10 @@ const styles = StyleSheet.create({
     height: 300,
     alignItems: "center",
     justifyContent: "center",
-    padding: 30
+    padding: 30,
   },
   texto: {
     fontSize: 20,
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
